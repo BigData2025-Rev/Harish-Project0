@@ -12,4 +12,6 @@ with open('circuits.csv', 'r') as circuits:
 
 df = pd.DataFrame.from_records([track.to_dict() for track in track_list])
 df.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
-print(df)
+
+with pd.option_context('display.max_rows', None):
+    print(df.to_string(index=False))
