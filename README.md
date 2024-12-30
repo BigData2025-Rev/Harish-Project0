@@ -3,7 +3,7 @@
 This is a simple Python CLI-based planner you can use to create your own international racing tournament. Your tournament must include between 3 and 5 tracks and cannot contain duplicates.
 
 ## Options
-- View (view all available tracks)
+- '''view''' to view all available tracks.
 - Add (add a track to your tournament)
 - Delete (delete a track from your tournament)
 - Current (view your current tournament)
