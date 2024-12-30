@@ -3,7 +3,9 @@
 This is a simple Python CLI-based planner you can use to create your own international racing tournament. Your tournament must include between 3 and 5 tracks and cannot contain duplicates.
 
 ## Setup
-- Download the project and run ```main.py``` to start the program. Ensure all relevant dependencies are installed beforehand.
+- Download the project and run ```main.py``` to start the program.
+> [!IMPORTANT]
+> Ensure all relevant dependencies are installed beforehand.
 
 ## Options
 - ```view``` to view all available tracks.
