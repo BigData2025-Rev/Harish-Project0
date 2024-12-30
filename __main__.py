@@ -21,10 +21,18 @@ def view_all():
     with pd.option_context('display.max_rows', None):
                 print(df.to_string(index=False))
 
+def current():
+    df_tourney = pd.DataFrame.from_records([track.to_dict() for track in tournament])
+    df_tourney.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
+    print('Current Tournament:\n')
+    print(df_tourney.to_string(index=False))
+    print('\n')
+
 def add():
     result = None
     if len(tournament) < 5:
         while result == None:
+            current()
             text = input('Type the Reference of the track you want to add: ')
             result = next((x for x in track_list if x.ref == text), None)
             if(result == None): print('That track doesn\'t exist. Please check the track list and try again.\n')
@@ -36,7 +44,7 @@ def add():
                 else: 
                     print('That track has already been added. Choose another one.\n')
                     result = None
-    else: print('Maximum number of tracks reached. To add another track, delete one first.\n')
+    else: print('Maximum number of tracks reached. To add another track, delete one first.')
 
 def delete():
     result = None
@@ -75,8 +83,8 @@ while not_complete:
             add()
         elif text == 'delete':
             delete()
-        elif text == 'random':
-            print('hey')
+        elif text == 'current':
+            current()
         elif text == 'filter':
             print('hey')
         elif text == 'done':
