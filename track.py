@@ -49,13 +49,13 @@ class Track:
     
     def to_dict(self):
         return {
-            'id' : self.id,
-            'ref' : self.ref,
-            'name' : self.name,
-            'location' : self.location,
-            'country' : self.country,
-            'lat' : self.lat,
-            'lng' : self.lng,
-            'alt' : self.alt,
-            'url' : self.url
+            'id' : self.__id,
+            'ref' : self.__ref,
+            'name' : self.__name,
+            'location' : self.__location,
+            'country' : self.__country,
+            'lat' : self.__lat,
+            'lng' : self.__lng,
+            'alt' : self.__alt,
+            'url' : self.__url
         }
