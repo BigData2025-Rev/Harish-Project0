@@ -12,5 +12,18 @@ class Track:
         self.url = url
 
     def __repr__(self):
-        return ("ID: " + self.id + " | Ref: " + self.ref + " | Name: " + self.name + " | Location: " + self.location + " | Country: " + self.country + " | Latitude: " + self.lat + 
+        return ("%-30s %4.1f") % ("ID: " + self.id + " | Ref: " + self.ref + " | Name: " + self.name + " | Location: " + self.location + " | Country: " + self.country + " | Latitude: " + self.lat + 
         " | Longitude: " + self.lng + " | Altitude: " + self.alt + " | URL: " + self.url+ "\n")
+    
+    def to_dict(self):
+        return {
+            'id' : self.id,
+            'ref' : self.ref,
+            'name' : self.name,
+            'location' : self.location,
+            'country' : self.country,
+            'lat' : self.lat,
+            'lng' : self.lng,
+            'alt' : self.alt,
+            'url' : self.url
+        }
