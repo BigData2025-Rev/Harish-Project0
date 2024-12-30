@@ -64,11 +64,14 @@ def current():
 
 def done():
     if len(tournament) < 2:
-        print("You have " + len(tournament) + " out of the minimum 3 tracks required. Add track(s) and try again.")
+        print("You have " + str(len(tournament)) + " out of the minimum 3 tracks required. Add track(s) and try again.")
     else:
         with open('tournament.csv', 'w', newline="") as tournament_file:
             csv_writer = csv.writer(tournament_file)
-            csv_writer.writerow(['circuitId'])
+            csv_writer.writerow(['circuitId', 'circuitRef', 'name', 'location', 'country', 'lat', 'lng', 'alt', 'url'])
+            for track in tournament:
+                csv_writer.writerow([track.id, track.ref, track.name, track.location, track.country, track.lat, track.lng, track.alt, track.url])
+        not_complete = False
 
 def exit():
     print("Exiting the program...")
