@@ -15,7 +15,7 @@ with open('circuits.csv', 'r') as circuits:
 df = pd.DataFrame.from_records([track.to_dict() for track in track_list])
 df.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
 
-print('Welcome to the International Racing Tournament Planner!\n\nYou can use this to design your own tournament by selecting tracks from around the world. Duplicating tracks isn\'t allowed. You must have between 3 to 5 tracks.')
+print('Welcome to the International Racing Tournament Planner!\n\nYou can use this to design your own tournament by selecting tracks from around the world. Duplicate tracks aren\'t allowed. You must have between 3 to 5 tracks.')
 
 def view_all():
     with pd.option_context('display.max_rows', None):
