@@ -109,5 +109,3 @@ while not_complete:
             exit()
         else:
             print('Not a valid option! Check the options and try again.')
-
-exit()
