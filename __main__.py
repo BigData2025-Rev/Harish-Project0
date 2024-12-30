@@ -49,6 +49,7 @@ def add():
 def delete():
     result = None
     if len(tournament) > 0:
+        current()
         text = input('Type the Reference of the track you want to delete: ')
         result = next((x for x in tournament if x.ref == text), None)
         while result == None: 
@@ -64,15 +65,13 @@ def exit_program():
 
 while not_complete:
     try:
-        text = input('\n\nOptions:' +
+        text = input('\nOptions:' +
       '\n\t- Type \"view\" to view all tracks.' +
       '\n\t- Type \"add\" to add a track to your tournament.' +
       '\n\t- Type \"delete\" to remove a track from your tournament.' +
       '\n\t- Type \"current\" to view your current tournament.' +
-      '\n\t- Type \"random\" to add a random number of tracks to your tournament.' +
-      '\n\t- Type \"filter\" to filter tracks by country.' +
       '\n\t- Type \"done\" to finalize your tournament.' +
-      '\n\t- Type \"exit\" to cancel and quit.\n\n')
+      '\n\t- Type \"exit\" to cancel and quit.\n')
     except ValueError:
         print("Oops! Invalid input detected.")
         continue
@@ -85,8 +84,6 @@ while not_complete:
             delete()
         elif text == 'current':
             current()
-        elif text == 'filter':
-            print('hey')
         elif text == 'done':
             print('hey')
         elif text == 'exit':
