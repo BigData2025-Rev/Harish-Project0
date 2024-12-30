@@ -10,8 +10,8 @@ not_complete = True
 with open('circuits.csv', 'r') as circuits:
     csv_reader = csv.reader(circuits)
     next(csv_reader, None)
-    for id, ref, name, location, country, lat, lng, alt, url in csv_reader:
-        track_list.append(Track(id, ref, name, location, country, lat, lng, alt, url))
+    for circuitId, circuitRef, name, location, country, lat, lng, alt, url in csv_reader:
+        track_list.append(Track(circuitId, circuitRef, name, location, country, lat, lng, alt, url))
 df = pd.DataFrame.from_records([track.to_dict() for track in track_list])
 df.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
 
@@ -21,19 +21,13 @@ def view_all():
     with pd.option_context('display.max_rows', None):
                 print(df.to_string(index=False))
 
-def current():
-    df_tourney = pd.DataFrame.from_records([track.to_dict() for track in tournament])
-    df_tourney.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
-    print('Current Tournament:\n')
-    print(df_tourney.to_string(index=False))
-    print('\n')
-
 def add():
     result = None
     if len(tournament) < 5:
         while result == None:
             current()
             text = input('Type the Reference of the track you want to add: ')
+            text = text.strip()
             result = next((x for x in track_list if x.ref == text), None)
             if(result == None): print('That track doesn\'t exist. Please check the track list and try again.\n')
             else: 
@@ -51,15 +45,32 @@ def delete():
     if len(tournament) > 0:
         current()
         text = input('Type the Reference of the track you want to delete: ')
+        text = text.strip()
         result = next((x for x in tournament if x.ref == text), None)
         while result == None: 
             text = input('That track doesn\'t exist in your tournament. Check your list and try again: ')
+            text = text.strip()
             result = next((x for x in tournament if x.ref == text), None)
         tournament.remove(result)
         print(result.name + ' deleted!')
     else: print('Your tournament is empty, there\'s nothing to delete.')
 
-def exit_program():
+def current():
+    df_tourney = pd.DataFrame.from_records([track.to_dict() for track in tournament])
+    df_tourney.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location' : 'Location', 'country' : 'Country', 'lat' : 'Latitude', 'lng' : 'Longitude', 'alt' : 'Altitude', 'url' : 'URL'}, inplace=True)
+    print('Current Tournament:\n')
+    print(df_tourney.to_string(index=False))
+    print('\n')
+
+def done():
+    if len(tournament) < 2:
+        print("You have " + len(tournament) + " out of the minimum 3 tracks required. Add track(s) and try again.")
+    else:
+        with open('tournament.csv', 'w', newline="") as tournament_file:
+            csv_writer = csv.writer(tournament_file)
+            csv_writer.writerow(['circuitId'])
+
+def exit():
     print("Exiting the program...")
     sys.exit(0)
 
@@ -76,6 +87,7 @@ while not_complete:
         print("Oops! Invalid input detected.")
         continue
     else:
+        text = text.strip()
         if text == 'view':
             view_all()
         elif text == 'add':
@@ -85,8 +97,10 @@ while not_complete:
         elif text == 'current':
             current()
         elif text == 'done':
-            print('hey')
+            done()
         elif text == 'exit':
-            exit_program()
+            exit()
         else:
             print('Not a valid option! Check the options and try again.')
+
+exit()
