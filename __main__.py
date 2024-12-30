@@ -17,7 +17,7 @@ df.rename(columns={'id' : 'ID', 'ref' : 'Reference', 'name' : 'Name', 'location'
 
 print('Welcome to the International Racing Tournament Planner!\n\nYou can use this to design your own tournament by selecting tracks from around the world. Duplicating tracks isn\'t allowed. You must have between 3 to 5 tracks.')
 
-def view():
+def view_all():
     with pd.option_context('display.max_rows', None):
                 print(df.to_string(index=False))
 
@@ -36,8 +36,19 @@ def add():
                 else: 
                     print('That track has already been added. Choose another one.\n')
                     result = None
-    else:
-        print('Maximum number of tracks reached. To add another track, delete one first.\n')
+    else: print('Maximum number of tracks reached. To add another track, delete one first.\n')
+
+def delete():
+    result = None
+    if len(tournament) > 0:
+        text = input('Type the Reference of the track you want to delete: ')
+        result = next((x for x in tournament if x.ref == text), None)
+        while result == None: 
+            text = input('That track doesn\'t exist in your tournament. Check your list and try again: ')
+            result = next((x for x in tournament if x.ref == text), None)
+        tournament.remove(result)
+        print(result.name + ' deleted!')
+    else: print('Your tournament is empty, there\'s nothing to delete.')
 
 def exit_program():
     print("Exiting the program...")
@@ -59,11 +70,11 @@ while not_complete:
         continue
     else:
         if text == 'view':
-            view()
+            view_all()
         elif text == 'add':
             add()
         elif text == 'delete':
-            print('hey')
+            delete()
         elif text == 'random':
             print('hey')
         elif text == 'filter':
