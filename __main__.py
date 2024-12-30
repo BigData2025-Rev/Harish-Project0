@@ -23,16 +23,21 @@ def view():
 
 def add():
     result = None
-    if len(tournament) <= 5:
+    if len(tournament) < 5:
         while result == None:
             text = input('Type the Reference of the track you want to add: ')
             result = next((x for x in track_list if x.ref == text), None)
-            if(result == None): print('That track doesn\'t exist. Please check the track list and try again.')
+            if(result == None): print('That track doesn\'t exist. Please check the track list and try again.\n')
             else: 
-                tournament.append(result)
-                print(result.name + ' added!')
+                check = next((x for x in tournament if x.ref == text), None)
+                if check == None: 
+                    tournament.append(result)
+                    print(result.name + ' added!')
+                else: 
+                    print('That track has already been added. Choose another one.\n')
+                    result = None
     else:
-        print('Maximum number of tracks reached. To add another track, delete one first.')
+        print('Maximum number of tracks reached. To add another track, delete one first.\n')
 
 def exit_program():
     print("Exiting the program...")
