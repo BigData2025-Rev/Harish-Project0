@@ -28,6 +28,7 @@ def add():
             current()
             text = input('Type the Reference of the track you want to add: ')
             text = text.strip()
+            text = text.lower()
             result = next((x for x in track_list if x.ref == text), None)
             if(result == None): print('That track doesn\'t exist. Please check the track list and try again.\n')
             else: 
@@ -46,6 +47,7 @@ def delete():
         current()
         text = input('Type the Reference of the track you want to delete: ')
         text = text.strip()
+        text = text.lower()
         result = next((x for x in tournament if x.ref == text), None)
         while result == None: 
             text = input('That track doesn\'t exist in your tournament. Check your list and try again: ')
@@ -83,7 +85,7 @@ while not_complete:
         text = input('\nOptions:' +
       '\n\t- Type \"view\" to view all tracks.' +
       '\n\t- Type \"add\" to add a track to your tournament.' +
-      '\n\t- Type \"delete\" to remove a track from your tournament.' +
+      '\n\t- Type \"delete\" to delete a track from your tournament.' +
       '\n\t- Type \"current\" to view your current tournament.' +
       '\n\t- Type \"done\" to finalize your tournament.' +
       '\n\t- Type \"exit\" to cancel and quit.\n')
@@ -92,6 +94,7 @@ while not_complete:
         continue
     else:
         text = text.strip()
+        text = text.lower()
         if text == 'view':
             view_all()
         elif text == 'add':
